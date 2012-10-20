@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load comments %}
+{% block title %}
+留言内容和相关的评论
+{% endblock %}
+{% block head %}
+留言内容和相关的评论
+{% endblock %}
+{% block content %}
+<table class="msglist">
+    <tr align="left">
+        <th>留言人：{{ msg.user.username }}</th>
+        <th>留言时间:{{ msg.datetime|date:"Y-m-d H:i" }}</th>
+        <th>IP地址：{{ msg.ip }}</th>
+    </tr>
+    <tr>
+        <th align="left">{{ msg.title }}</th>
+    </tr>
+    <tr>
+        <td colspan="3">{{ msg.content }}</td>
+    </tr>
+</table>
+<br />
+
+{#    use the /comments/list.html#}
+    {% render_comment_list for messageboard.msg msg.id %}
+
+{#    use the /comments/form.html#}
+    {% render_comment_form for messageboard.msg msg.id %}
+
+    {% endblock %}

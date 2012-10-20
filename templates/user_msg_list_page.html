@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load comments %}
+{% block title %}
+{{ username }}发表的所有留言
+{% endblock %}
+{% block content %}
+<table class="msglist">
+    <caption>
+        <h2>{{ username }}发表的留言</h2>
+    </caption>
+    {% include "msg_list.html" %}
+</table>
+{% include "paginator.html" %}
+{% endblock %}

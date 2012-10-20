@@ -1,0 +1,21 @@
+{% load comments %}
+{% if user.is_authenticated %}
+        <form action="/comments/post/" method="post">{% csrf_token %}
+            {{ form.content_type }}{{ form.object_pk }}
+            {{ form.timestamp }}{{ form.security_hash }}
+            <p><label>发表评论</label>
+                <br />
+                <textarea rows="10" cols="60" name="comment"></textarea>
+            </p>
+                {{ comment_form.object_pk }}
+                {{ comment_form.content_type }}
+                {{ comment_form.timestamp }}
+                {{ comment_form.security_hash }}
+{#            <input type="hidden" name="options" value="{{ options }}">#}
+{#            <input type="hidden" name="target" value="{{ target }}">#}
+{#            <input type="hidden" name="gonzo" value="{{ hash }}">#}
+            <input type="submit" name="post" value="提交评论">
+            {% else %}
+            <p>请<a href="/accounts/login/?next={{ request.get_full_path }}">登录</a>后再评论。</p>
+        </form>
+    {% endif %}

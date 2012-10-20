@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+评论发表成功
+{%  endblock %}
+{% block head %}
+评论发表成功！
+{% endblock %}
+{% block content %}
+<p>谢谢你的评论</p>
+{% if object %}
+<p><a href="/detail/{{ object.id }}/">查看您的评论</a> </p>
+{% endif  %}
+{% endblock %}

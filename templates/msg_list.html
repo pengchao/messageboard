@@ -1,0 +1,41 @@
+<tr class="center">
+    <th>主题</th>
+    <th>留言人</th>
+    <th>IP地址</th>
+    <th>留言时间</th>
+    <th>点击数</th>
+    <th>评论数</th>
+</tr>
+<!--如果msg_list的值非空 -->
+{% if msg_list %}
+<!--加载Django自带的评论应用自定义标签库 -->
+{% load comments %}
+{% for msg in msg_list %}
+<tr align="center">
+    <td align="left">
+        <a href="/detail/{{ msg.id }}/">{{ msg.title }}</a>
+    </td>
+    <td>
+        <a href="/user/{{ msg.user.username }}/">{{ msg.user.username }}</a>
+    </td>
+    <td>
+        {{ msg.ip }}
+    </td>
+    <td>
+        {{ msg.datetime|date:"Y-m-d H:i" }}
+    </td>
+    <td>
+        {{ msg.clickcount }}
+    </td>
+    <td>
+{#        使用comments的统计评论数#}
+        {% get_comment_count for messageBoard.msg msg.id as comment_count %}
+        {{ comment_count }}
+    </td>
+</tr>
+{% endfor %}
+{% else %}
+<tr align="center">
+    <td colspan="8">目前还没有留言信息！</td>
+</tr>
+{% endif %}

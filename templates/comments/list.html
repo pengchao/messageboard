@@ -1,0 +1,22 @@
+{#<dl id="comments">#}
+{#  {% for comment in comment_list %}#}
+{#    <dt id="c{{ comment.id }}">#}
+{#        {{ comment.submit_date }} - {{ comment.name }}#}
+{#    </dt>#}
+{#    <dd>#}
+{#        <p>{{ comment.comment }}</p>#}
+{#    </dd>#}
+{#  {% endfor %}#}
+{#</dl>#}
+
+{#{% get_comment_list for messageboard.msg msg.id as comment %}#}
+
+{% for comment in comment_list %}
+    <div class="comment">
+        <p>评论人：<b>{{ comment.user.username }}</b>&nbsp;&nbsp;&nbsp;
+            评论时间：{{ comment.submit_date|date:"Y-m-d H:i" }}&nbsp;&nbsp;&nbsp;
+            IP地址：{{ msg.ip }}
+        </p>
+        {{ comment.comment|urlizetrunc:400|linebreaks }}
+    </div>
+{% endfor %}
